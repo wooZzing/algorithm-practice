@@ -1,0 +1,39 @@
+package com.baekjoon.basicone;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Problem11055 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        int[] arr = new int[N];
+
+        String[] input = br.readLine().split(" ");
+
+        for(int i = 0; i < N; i++){
+            arr[i] = Integer.parseInt(input[i]);
+        }
+
+        int[] dp = new int[N];
+        int max = 0;
+
+        for(int i = 0; i < N; i++){
+            dp[i] = arr[i];
+
+            for(int j = 0; j < i; j++){
+                if(arr[i] > arr[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + arr[i]);
+                }
+            }
+            max = Math.max(max, dp[i]);
+        }
+
+        System.out.println(max);
+
+        br.close();
+    }
+}
